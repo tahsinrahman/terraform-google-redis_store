@@ -25,6 +25,12 @@ variable "ip_cidr_range" {
 # OPTIONAL PARAMETERS
 # ----------------------------------------------------------------------------------------------------------------------
 
+variable "name" {
+  description = "An arbitrary name for the redis instance."
+  type        = string
+  default     = "v1"
+}
+
 variable "memory_size_gb" {
   description = "Size of the redis memorystore in GB."
   type        = number
