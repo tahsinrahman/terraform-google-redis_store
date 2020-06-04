@@ -62,7 +62,7 @@ variable "redis_version" {
 }
 
 variable "service_tier" {
-  description = "Either \"BASIC\" for standalone or \"STANDARD_HA\" for high-availability."
+  description = "Either \"BASIC\" for standalone or \"STANDARD_HA\" for high-availability. Should provide \"var.alternate_zone_letter\" if the value of this is set to \"STANDARD_HA\"."
   type        = string
   default     = "BASIC"
 }
