@@ -13,6 +13,10 @@ locals {
 
   # determine a region if it is not provided
   region = var.region == null ? data.google_client_config.google_client.region : var.region
+
+  # determine a primary zone if it is not provided
+  primary_zone_letter = var.primary_zone_letter == null ? "a" : var.primary_zone_letter
+  primary_zone        = "${local.region}-${local.primary_zone_letter}"
 }
 
 data "google_client_config" "google_client" {}
@@ -30,6 +34,7 @@ resource "google_redis_instance" "redis_store" {
   tier               = var.service_tier
   authorized_network = var.vpc_network
   region             = local.region
+  location_id        = local.primary_zone
   reserved_ip_range  = var.ip_cidr_range
   depends_on         = [google_project_service.redis_api]
   timeouts {
