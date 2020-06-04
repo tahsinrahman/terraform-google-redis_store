@@ -31,6 +31,12 @@ variable "name" {
   default     = "v1"
 }
 
+variable "region" {
+  description = "The region to launch the redis instance in. Defaults to the google provider's region if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
+  type        = string
+  default     = null
+}
+
 variable "memory_size_gb" {
   description = "Size of the redis memorystore in GB."
   type        = number
