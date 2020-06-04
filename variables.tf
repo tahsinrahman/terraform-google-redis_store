@@ -43,6 +43,12 @@ variable "primary_zone_letter" {
   default     = null
 }
 
+variable "alternate_zone_letter" {
+  description = "The zone to launch alternate/replica redis instance in. Used only in case of \"STANDARD_HA\" service_tier. Options are \"a\" or \"b\" or \"c\" or \"d\". Value must not be same as \"var.primary_zone_letter\". Defaults to a zone letter other than \"var.primary_zone_letter\" if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
+  type        = string
+  default     = null
+}
+
 variable "memory_size_gb" {
   description = "Size of the redis memorystore in GB."
   type        = number
