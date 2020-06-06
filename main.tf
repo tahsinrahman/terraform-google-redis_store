@@ -18,8 +18,8 @@ locals {
 
   # determine an alternate zone if it is not provided
   all_zone_letters       = ["a", "b", "c", "d"]
-  remaining_zone_letters = setsubtract(toset(local.all_zone_letters), [local.primary_zone_letter])
-  alternate_zone_letter  = var.alternate_zone_letter == null ? tolist(local.remaining_zone_letters).0 : var.alternate_zone_letter
+  remaining_zone_letters = tolist(setsubtract(toset(local.all_zone_letters), toset([local.primary_zone_letter])))
+  alternate_zone_letter  = var.alternate_zone_letter == null ? local.remaining_zone_letters.0 : var.alternate_zone_letter
   alternate_zone         = "${local.region}-${local.alternate_zone_letter}"
 }
 
