@@ -31,12 +31,6 @@ variable "name" {
   default     = "v1"
 }
 
-variable "region" {
-  description = "The region to launch the redis instance in. Defaults to the google provider's region if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
-  type        = string
-  default     = null
-}
-
 variable "primary_zone_letter" {
   description = "The zone to launch the redis instance in. Options are \"a\" or \"b\" or \"c\" or \"d\". Defaults to \"a\" zone of the region if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
   type        = string
