@@ -39,7 +39,7 @@ resource "google_redis_instance" "redis_store" {
   authorized_network      = var.vpc_network
   region                  = local.region
   location_id             = local.primary_zone
-  alternative_location_id = var.service_tier != "STANDARD_HA" ? null : local.alternate_zone
+  alternative_location_id = var.service_tier == "STANDARD_HA" ? local.alternate_zone : null
   reserved_ip_range       = var.ip_cidr_range
   depends_on              = [google_project_service.redis_api]
   timeouts {
