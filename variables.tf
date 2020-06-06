@@ -31,14 +31,14 @@ variable "name" {
   default     = "v1"
 }
 
-variable "primary_zone_letter" {
-  description = "The zone to launch the redis instance in. Options are \"a\" or \"b\" or \"c\" or \"d\". Defaults to \"a\" zone of the region if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
+variable "primary_zone" {
+  description = "The zone to launch the redis instance in. Options are \"a\" or \"b\" or \"c\" or \"d\". Defaults to \"a\" zone of the Google provider's region if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
   type        = string
   default     = null
 }
 
-variable "alternate_zone_letter" {
-  description = "The zone to launch alternate/replica redis instance in. Used only in case of \"STANDARD_HA\" service_tier. Options are \"a\" or \"b\" or \"c\" or \"d\". Value must not be same as \"var.primary_zone_letter\". Defaults to a zone letter other than \"var.primary_zone_letter\" if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
+variable "alternate_zone" {
+  description = "The zone to launch alternate redis instance in when \"var.service_tier\" is set to be \"STANDARD_HA\". Options are \"a\" or \"b\" or \"c\" or \"d\" - must not be same as \"var.primary_zone\". Defaults to a zone other than \"var.primary_zone\" if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
   type        = string
   default     = null
 }

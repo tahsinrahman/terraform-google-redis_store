@@ -13,13 +13,13 @@ locals {
   region                    = data.google_client_config.google_client.region
 
   # determine a primary zone if it is not provided
-  primary_zone_letter = var.primary_zone_letter == null ? "a" : var.primary_zone_letter
+  primary_zone_letter = var.primary_zone == null ? "a" : var.primary_zone
   primary_zone        = "${local.region}-${local.primary_zone_letter}"
 
   # determine an alternate zone if it is not provided
   all_zone_letters       = ["a", "b", "c", "d"]
-  remaining_zone_letters = setsubtract(toset(local.all_zone_letters), [local.primary_zone_letter])
-  alternate_zone_letter  = var.alternate_zone_letter == null ? tolist(local.remaining_zone_letters).0 : var.alternate_zone_letter
+  remaining_zone_letters = tolist(setsubtract(toset(local.all_zone_letters), toset([local.primary_zone_letter])))
+  alternate_zone_letter  = var.alternate_zone == null ? local.remaining_zone_letters.0 : var.alternate_zone
   alternate_zone         = "${local.region}-${local.alternate_zone_letter}"
 }
 
@@ -39,7 +39,7 @@ resource "google_redis_instance" "redis_store" {
   authorized_network      = var.vpc_network
   region                  = local.region
   location_id             = local.primary_zone
-  alternative_location_id = var.service_tier != "STANDARD_HA" ? null : local.alternate_zone
+  alternative_location_id = var.service_tier == "STANDARD_HA" ? local.alternate_zone : null
   reserved_ip_range       = var.ip_cidr_range
   depends_on              = [google_project_service.redis_api]
   timeouts {
