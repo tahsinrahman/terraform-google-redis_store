@@ -34,13 +34,13 @@ variable "name" {
 variable "primary_zone" {
   description = "The zone to launch the redis instance in. Options are \"a\" or \"b\" or \"c\" or \"d\". Defaults to \"a\" zone of the Google provider's region if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "alternate_zone" {
   description = "The zone to launch alternate redis instance in when \"var.service_tier\" is set to be \"STANDARD_HA\". Options are \"a\" or \"b\" or \"c\" or \"d\" - must not be same as \"var.primary_zone\". Defaults to a zone other than \"var.primary_zone\" if nothing is specified here. See https://cloud.google.com/compute/docs/regions-zones."
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "memory_size_gb" {
